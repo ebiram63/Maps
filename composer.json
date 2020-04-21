@@ -1,0 +1,14 @@
+{
+    "name": "ebi/maps",
+    "description": "the project is location user in maps",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ebi",
+            "email": "ebi.mohamadi63@yahoo.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
