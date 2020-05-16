@@ -67,3 +67,11 @@ map.on('locationerror', function(e) {
 //};
 //cal locate everndsy 5 seco
 //setInterval(locate, 5000);
+
+
+
+$(document).ready(function() {
+    $('.modal-overlay .close').click(function() {
+        $('.modal-overlay').fadeOut();
+    });
+});

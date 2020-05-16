@@ -62,12 +62,5 @@
 
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/script.js<?= "?v=" . rand(99,999999)?>"></script>
-    <script>
-        $(document).ready(function(){
-            $('.modal-overlay .close').click(function(){
-                $('.modal-overlay').fadeOut();
-            });
-        });
-    </script>
 </body>
 </html>
