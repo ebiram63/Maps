@@ -26,7 +26,7 @@
             <span class="close">x</span>
             <h3 class="modal-title">ثبت لوکیشن</h3>
             <div class="modal-content">
-                <form action="<?= baseurl('proccess/addLocation.php')?>" method="post" >
+                <form id="addLocationForm" action="<?= baseurl('proccess/addLocation.php')?>" method="POST" >
                     <div class="field-row">
                         <div class="field-title">مختصات</div>
                         <div class="field-content">
@@ -36,12 +36,12 @@
                         <div class="field-row"></div>
                             <div class="field-title">نام مکان</div>
                             <div class="field-content">
-                                <input type="text" name="title" placeholder="مثلا دفتر مرکزی">
+                                <input type="text" id="l-title" name="title" placeholder="مثلا دفتر مرکزی">
                             </div>
                             <div class="field-row">
                                 <div class="field-title">نوع</div>
                                 <div class="field-content">
-                                    <select name="type" id="">
+                                    <select name="type" id="l-type">
                                         <?php foreach(locationTypes as $key=>$value): ?>
                                                 <option value="<?= $key?>" ><?= $value?></option>
                                         <?php endforeach; ?>
@@ -55,6 +55,7 @@
                                 </div>
                             </div>
                     </div>
+                    <div class="ajax-result"></div>
                 </form>
             </div>
         </div>

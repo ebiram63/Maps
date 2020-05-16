@@ -36,6 +36,8 @@ map.on('dblclick', function(event) {
     $('.modal-overlay').fadeIn(500);
     $('#lat-display').val(event.latlng.lat);
     $('#lng-display').val(event.latlng.lng);
+    $('#l-type').val(0);
+    $('#l-title').val('');
 });
 
 // set view in map 
@@ -65,12 +67,29 @@ map.on('locationerror', function(e) {
 //function locate() {
 //   map.locate({ setView: true, maxZoom: defaultZoom });
 //};
+
+
 //cal locate everndsy 5 seco
 //setInterval(locate, 5000);
 
-
-
 $(document).ready(function() {
+    $('form#addLocationForm').submit(function(e) {
+        e.preventDefault(); // prevent from submiting
+        var form = $(this);
+        var resultTag = form.find('.ajax-result')
+        $.ajax({
+            url: form.attr('action'),
+            method: form.attr('method'),
+            data: form.serialize(),
+            success: function(response) {
+                resultTag.html(response);
+            }
+        });
+
+
+    });
+
+
     $('.modal-overlay .close').click(function() {
         $('.modal-overlay').fadeOut();
     });

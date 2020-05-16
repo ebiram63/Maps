@@ -8,3 +8,8 @@ if(!isAjaxRequest()){
 }
 
 // request is Ajax Ok
+if(insertLocation($_POST)){
+    echo "موقعیت با موفقیت در پایگاه داده ثبت شد و منتظر تایید مدیر است";
+}else{
+    echo "مشگلی در ثبت مکان ایجاد شده است";
+}
