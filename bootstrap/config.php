@@ -7,3 +7,11 @@ $database_config =(object)[
     'db' => '7map' 
 
 ];
+
+// auth user in file
+$admins =[
+    'admin' => 'admin',
+    'loghman' => 'loghman'
+
+
+];

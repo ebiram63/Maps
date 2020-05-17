@@ -8,3 +8,7 @@ function insertLocation($data){
     $stmt ->execute([':title'=>$data['title'],'lat'=>$data['lat'],'lng'=>$data['lng'],'type'=>$data['type']]);
     return $stmt->rowCount();
 }
+
+function getLocations(){
+    
+}

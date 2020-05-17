@@ -1,5 +1,5 @@
 <?php 
-//session_start();
+session_start();
 #include page for clean code
 include "constant.php";
 include BASEPATH . "/libs/helpers.php";
@@ -20,6 +20,8 @@ try {
 
 #include page for clean code
 
+include BASEPATH . "/libs/lib-users.php";
+include BASEPATH . "/libs/lib-locations.php";
 
 //include lib-locations
 include BASEPATH . "/libs/lib-locations.php";
