@@ -63,5 +63,11 @@
 
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/script.js<?= "?v=" . rand(99,999999)?>"></script>
+    <script>
+        // for open location in your map by eye icon in panel
+        <?php if($location): ?>
+                L.marker([<?=$location->lat ?>,<?= $location->lng?>]).addTo(map).bindPopup("<?= $location->title?>").openPopup();
+        <?php endif;?>   
+    </script>
 </body>
 </html>

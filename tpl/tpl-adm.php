@@ -1,3 +1,6 @@
+<?php 
+    use Hekmatinasser\Verta\Verta;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,11 +35,14 @@
     table.tabe-locations {
         width: 100%;
         border-collapse: collapse;
+        direction: rtl;
     }
     .statusToggle {
         background: #eee;
         color: #686868;
         border: 0;
+        text-align: center;
+        min-width: 60px;
         padding: 3px 12px;
         border-radius: 20px;
         cursor: pointer;
@@ -48,6 +54,11 @@
     }
     .statusToggle.active {
         background: #0c8f10;
+        color: #ffffff;
+    }
+
+    .statusToggle.all {
+        background: #007bec;
         color: #ffffff;
     }
     .statusToggle:hover,button.preview:hover {
@@ -82,9 +93,10 @@
     <div class="main-panel">
         <h1>پنل مدیریت <span style="color:#007bec">سون مپ</span></h1>
         <div class="box">
-            <a class="statusToggle" href="<?=SITE_URL?>" target="_blank">🏠</a>
-            <a class="statusToggle active" href="?status=1">فعال</a>
-            <a class="statusToggle" href="?status=0">غیرفعال</a>
+            <a class="statusToggle" href="<?=SITE_URL?>" style="float:right" target="_blank">🏠</a>
+            <a class="statusToggle all" href="<?= SITE_URL?>adm.php" style="float:right">همه</a>
+            <a class="statusToggle active" href="?verified=1" style="float:right">فعال</a>
+            <a class="statusToggle" href="?verified=0" >غیرفعال</a>
             <a class="statusToggle" href="?logout=1" style="float:left" target="_blank">خروج</a>
         </div>
         <div class="box">
@@ -99,19 +111,21 @@
         </tr>
         </thead>
         <tbody>
-        <?php for($i=0;$i<10;$i++): ?>
+        <?php foreach($locations as $loc): ?>
         <tr>
-            <td>نام مکان اینجا</td>
-            <td class="text-center">12 خرداد 95</td>
-            <td class="text-center">25.454</td>
-            <td class="text-center">34.456</td>
+            <td><?=$loc->title?></td>
+            <td class="text-center"><?=Verta::instance($loc->created_at)->format(' %d %B %Y');?></td>
+            <td class="text-center"><?=$loc->lat?></td>
+            <td class="text-center"><?=$loc->lng?></td>
             <td>
-                <button class="statusToggle active" data-loc='111'>فعال</button> 
-                <button class="statusToggle" data-loc='111'>غیر فعال</button> 
-                <button class="preview" data-loc='111'>👁️‍🗨️</button> 
+                <button class="statusToggle <?= $loc->verified ? 'active' : '' ?>" data-loc=<?=$loc->id?>> 
+                   تایید
+                </button> 
+                
+                <button class="preview" data-loc='<?= $loc->id?>'>👁️‍🗨️</button> 
             </td>
         </tr>
-<?php endfor; ?>        
+        <?php endforeach; ?>        
         </tbody>
         </table>
         </div>
@@ -129,12 +143,32 @@
 
 
 
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.js"></script>
     <script>
     $(document).ready(function() {
         $('.preview').click(function() {
             $('.modal-overlay').fadeIn();
-            $('#mapWivdow').attr('src','<?=SITE_URL?>');
+            $('#mapWivdow').attr('src','<?=SITE_URL ?>?loc=' +$(this).attr('data-loc'));
+        });
+        $('.modal-overlay .close').click(function() {
+            $('.modal-overlay').fadeOut();
+        });
+
+        // taggle click for active or notactive location in panel
+        $('.statusToggle').click(function() {
+            const btn = $(this);
+
+            $.ajax({
+                url: '<?= SITE_URL . 'proccess/statusToggle.php'?>',
+                method: 'POST',
+                data:{loc:btn.attr('data-loc')},
+                success: function(response){
+                    if(response == 1){
+                            btn.toggleClass('active');
+                        }
+                    }
+
+            });
         });
         $('.modal-overlay .close').click(function() {
             $('.modal-overlay').fadeOut();

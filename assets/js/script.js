@@ -93,4 +93,5 @@ $(document).ready(function() {
     $('.modal-overlay .close').click(function() {
         $('.modal-overlay').fadeOut();
     });
+
 });

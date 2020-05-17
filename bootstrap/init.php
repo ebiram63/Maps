@@ -5,7 +5,7 @@ include "constant.php";
 include BASEPATH . "/libs/helpers.php";
 include BASEPATH . "/bootstrap/config.php";
 
-//include BASEPATH . "/vendor/autoload.php";
+include BASEPATH . "/vendor/autoload.php";
 
 
 #connect to db
@@ -21,7 +21,6 @@ try {
 #include page for clean code
 
 include BASEPATH . "/libs/lib-users.php";
-include BASEPATH . "/libs/lib-locations.php";
 
 //include lib-locations
 include BASEPATH . "/libs/lib-locations.php";
