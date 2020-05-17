@@ -64,9 +64,9 @@ map.on('locationerror', function(e) {
     alert(e.message);
 });
 //wrap map.locate in a function
-//function locate() {
-//   map.locate({ setView: true, maxZoom: defaultZoom });
-//};
+function locate() {
+    map.locate({ setView: true, maxZoom: defaultZoom });
+};
 
 
 //cal locate everndsy 5 seco
