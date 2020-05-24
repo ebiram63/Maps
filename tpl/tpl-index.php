@@ -12,15 +12,22 @@
     <script src="assets/js/main.js"></script>
 </head>
 <body>
+    <!-- head tag search -->
     <div class="main">
-        <div class="head">
-            <input type="text" id="search" placeholder="دنبال کجا میگردی؟"/>
+    <div class="head">
+        <div class="search-box">
+        <input type="text" id="search" placeholder="دنبال کجا می گردی؟">
+        <div class="clear"></div>
+        <div class="search-results" style="display: none;width: 400px"></div>
         </div>
+        </div>
+
+        <!-- end head tag for search -->
     <div class="mapContainer">
         <div id="map" style="width: 100%; height: 700px"></div>
     </div>
     <img src="assets/img/current.png" class="currentLoc">
-    </div>
+</div>
 
     <div class="modal-overlay" style="display:none;">
         <div class="modal">
@@ -75,7 +82,22 @@
             $('img.currentLoc').click(function(){
                 locate();
             });
+            $('#search').keyup(function(){
+                const input = $(this);
+                const saerchResult = $('.search-results');
+
+            $.ajax({
+                url: '<?= SITE_URL . 'proccess/search.php'?>',
+                method: 'POST',
+                data:{keyword:input.val()},
+                success: function(response){
+                    saerchResult.slideDown().html(response);
+                         }
+
+                });
+            })
         });
-    </script>
+
+    ;</script>
 </body>
 </html>

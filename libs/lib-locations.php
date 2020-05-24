@@ -12,8 +12,11 @@ function insertLocation($data){
 function getLocations($params = []){
     global $pdo;
     $condition = ' ' ;
-    if(isset($params['verified']) and in_array($params['verified'],['0','1'])){
+    if(isset($params['verified']) && in_array($params['verified'],['0','1'])){
         $condition = "WHERE verified = {$params['verified']}";
+    }
+   elseif(isset($params['keyword'])){
+        $condition = "WHERE verified = 1 and title like '%{$params['keyword']}%' ";
     }
     $sql =  "SELECT * FROM `location` $condition";
     $stmt = $pdo->prepare($sql);

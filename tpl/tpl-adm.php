@@ -118,9 +118,9 @@
             <td class="text-center"><?=$loc->lat?></td>
             <td class="text-center"><?=$loc->lng?></td>
             <td>
-                <button class="statusToggle <?= $loc->verified ? 'active' : '' ?>" data-loc=<?=$loc->id?>> 
-                   تایید
-                </button> 
+            <button class="statusToggle <?= $loc->verified ? 'active' : '' ?>" data-loc='<?=$loc->id?>'>
+                    تایید
+                </button>
                 
                 <button class="preview" data-loc='<?= $loc->id?>'>👁️‍🗨️</button> 
             </td>
@@ -150,13 +150,11 @@
             $('.modal-overlay').fadeIn();
             $('#mapWivdow').attr('src','<?=SITE_URL ?>?loc=' +$(this).attr('data-loc'));
         });
-        $('.modal-overlay .close').click(function() {
-            $('.modal-overlay').fadeOut();
-        });
-
+      
         // taggle click for active or notactive location in panel
         $('.statusToggle').click(function() {
             const btn = $(this);
+            
 
             $.ajax({
                 url: '<?= SITE_URL . 'proccess/statusToggle.php'?>',

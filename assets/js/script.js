@@ -32,12 +32,13 @@ document.getElementById('map').style.setProperty('height', window.innerHeight + 
 //});
 map.on('dblclick', function(event) {
     //(sample) alert(event.latlng.lat + " ," + event.latlng.lng);
-    L.marker(event.latlng).addTo(map);
+    var marker = L.marker(event.latlng).addTo(map);
     $('.modal-overlay').fadeIn(500);
     $('#lat-display').val(event.latlng.lat);
     $('#lng-display').val(event.latlng.lng);
     $('#l-type').val(0);
     $('#l-title').val('');
+
 });
 
 // set view in map 
@@ -94,4 +95,18 @@ $(document).ready(function() {
         $('.modal-overlay').fadeOut();
     });
 
+});
+// add Location New if Undefined
+var Pin = {};
+
+map.on('click', function(e) {
+    lat = e.latlng.lat;
+    lon = e.latlng.lng;
+
+    if (Pin != undefined) {
+        map.removeLayer(Pin);
+    };
+
+    //Add a marker to show where you clicked.
+    Pin = L.marker([lat, lon]).addTo(map);
 });
